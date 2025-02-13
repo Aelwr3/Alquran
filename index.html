@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عاهدت القرآن - واجهة المستخدم</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar">
+        <div class="logo">🌙 عاهدت القرآن</div>
+        <ul class="nav-links">
+            <li><a href="#progress">تقدمي</a></li>
+            <li><a href="#quran">المصحف</a></li>
+            <li><a href="#community">المجتمع</a></li>
+        </ul>
+    </nav>
+
+    <!-- قسم الترحيب -->
+    <header class="hero-section">
+        <h1>وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ</h1>
+        <div class="progress-circle" id="mainProgress">
+            <div class="progress-text">
+                <span class="percentage">0%</span>
+                <span class="label">إنجاز الختمة</span>
+            </div>
+        </div>
+        <button class="cta-button" onclick="openDailySection()">ابدأ الجزء اليومي</button>
+    </header>
+
+    <!-- قسم الإحصائيات -->
+    <section class="stats-container">
+        <div class="stat-card">
+            <h3>الأيام المتبقية</h3>
+            <p id="remainingDays">30</p>
+        </div>
+        <div class="stat-card">
+            <h3>الصفحات المقروءة</h3>
+            <p id="readPages">15</p>
+        </div>
+        <div class="stat-card">
+            <h3>الإنجازات</h3>
+            <p id="achievements">3</p>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
