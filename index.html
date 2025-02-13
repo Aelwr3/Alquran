@@ -3,48 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عاهدت القرآن - واجهة المستخدم</title>
+    <title>عاهدت القرآن - المنصة القرآنية المتكاملة</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- شريط التنقل العلوي -->
+    <!-- الشريط العلوي -->
     <nav class="navbar">
-        <div class="logo">🌙 عاهدت القرآن</div>
-        <ul class="nav-links">
-            <li><a href="#progress">تقدمي</a></li>
-            <li><a href="#quran">المصحف</a></li>
-            <li><a href="#community">المجتمع</a></li>
-        </ul>
+        <div class="logo-container">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSIjZmZmIj48cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMm01IDE3aC0ydi02aDJ2NnptMC04aC0yVjdoMnY0eiIvPjwvc3ZnPg==" class="logo-icon">
+            <h1 class="logo-text">عاهدت القرآن</h1>
+        </div>
+        <div class="nav-actions">
+            <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+        </div>
     </nav>
 
-    <!-- قسم الترحيب -->
-    <header class="hero-section">
-        <h1>وَلَقَدْ يَسَّرْنَا الْقُرْآنَ لِلذِّكْرِ فَهَلْ مِن مُّدَّكِرٍ</h1>
-        <div class="progress-circle" id="mainProgress">
-            <div class="progress-text">
-                <span class="percentage">0%</span>
-                <span class="label">إنجاز الختمة</span>
+    <!-- القسم الرئيسي -->
+    <main class="container">
+        <!-- بطاقة التقدم -->
+        <section class="progress-card">
+            <div class="progress-header">
+                <h2>ختمتك الحالية</h2>
+                <span class="plan-duration">30 يومًا</span>
+            </div>
+            
+            <div class="progress-ring">
+                <div class="ring-bg"></div>
+                <div class="ring-progress" style="--progress: 30%"></div>
+                <div class="progress-content">
+                    <span class="percentage">30%</span>
+                    <span class="completed">أكملت 9 أجزاء</span>
+                </div>
+            </div>
+
+            <div class="progress-actions">
+                <button class="daily-button" id="dailyButton">
+                    <span>الجزء اليومي</span>
+                    <span class="surah-name">سورة البقرة (1-20)</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- إحصائيات -->
+        <section class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-icon">📅</div>
+                <div class="stat-info">
+                    <h3>الأيام المتبقية</h3>
+                    <p>21 يومًا</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">📖</div>
+                <div class="stat-info">
+                    <h3>الصفحات اليومية</h3>
+                    <p>4 صفحات</p>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-info">
+                    <h3>الإنجازات</h3>
+                    <p>3 ميداليات</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- نافذة الجزء اليومي (مخفية مبدئيًا) -->
+    <div class="daily-modal" id="dailyModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeDailyModal()">&times;</button>
+            <h2>الجزء اليومي: السبت ١٥ رجب</h2>
+            <div class="reading-section">
+                <div class="quran-text">
+                    <p>بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+                    <p>الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿١﴾</p>
+                </div>
+                <div class="actions">
+                    <button class="action-button marked">تمت القراءة ✓</button>
+                    <button class="action-button">تلاوة صوتية 🎧</button>
+                </div>
             </div>
         </div>
-        <button class="cta-button" onclick="openDailySection()">ابدأ الجزء اليومي</button>
-    </header>
-
-    <!-- قسم الإحصائيات -->
-    <section class="stats-container">
-        <div class="stat-card">
-            <h3>الأيام المتبقية</h3>
-            <p id="remainingDays">30</p>
-        </div>
-        <div class="stat-card">
-            <h3>الصفحات المقروءة</h3>
-            <p id="readPages">15</p>
-        </div>
-        <div class="stat-card">
-            <h3>الإنجازات</h3>
-            <p id="achievements">3</p>
-        </div>
-    </section>
+    </div>
 
     <script src="app.js"></script>
 </body>
