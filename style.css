@@ -1,0 +1,118 @@
+/* الأساسيات */
+:root {
+    --primary-color: #1A5276;
+    --secondary-color: #D4AF37;
+    --background-color: #f0f0f0;
+}
+
+* {
+    font-family: 'Amiri', serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+}
+
+/* شريط التنقل */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+/* قسم الترحيب */
+.hero-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: linear-gradient(45deg, var(--primary-color), #0d3a5c);
+    color: white;
+}
+
+.progress-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(var(--secondary-color) 0%, transparent 0%);
+    margin: 2rem auto;
+    position: relative;
+}
+
+.progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.percentage {
+    font-size: 2.5rem;
+    display: block;
+}
+
+.cta-button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.cta-button:hover {
+    transform: scale(1.05);
+}
+
+/* إحصائيات */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    width: 200px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .progress-circle {
+        width: 150px;
+        height: 150px;
+    }
+}
