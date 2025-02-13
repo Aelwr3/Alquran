@@ -1,45 +1,51 @@
-// تهيئة التخزين المحلي
-function initializeStorage() {
-    if (!localStorage.getItem('userData')) {
-        const userData = {
-            username: prompt('ادخل اسمك المستعار:') || 'ضيف',
-            country: 'غير محدد',
-            startDate: new Date().toISOString(),
-            progress: 0,
-            readPages: 0
+// تهيئة التطبيق
+function initializeApp() {
+    // تحميل البيانات من localStorage
+    const savedData = localStorage.getItem('quranProgress');
+    if (!savedData) {
+        const defaultData = {
+            username: 'ضيف',
+            progress: 30,
+            daysRemaining: 21,
+            currentPart: 'سورة البقرة (1-20)'
         };
-        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.setItem('quranProgress', JSON.stringify(defaultData));
     }
-}
-
-// تحديث دائرة التقدم
-function updateProgress() {
-    const progressData = JSON.parse(localStorage.getItem('userData'));
-    const progressCircle = document.querySelector('.progress-circle');
-    const percentageElement = document.querySelector('.percentage');
     
-    progressCircle.style.background = 
-        `conic-gradient(var(--secondary-color) ${progressData.progress}%, transparent 0%)`;
-    percentageElement.textContent = `${Math.round(progressData.progress)}%`;
+    // تطبيق الثيم
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    // تحديث الواجهة
+    updateUI();
 }
 
-// فتح الجزء اليومي
-function openDailySection() {
-    // سيتم تطويرها لاحقًا
-    alert('سيتم فتح الجزء اليومي هنا!');
+// تبديل الثيم
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
 }
 
-// تحديث الإحصائيات
-function updateStats() {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    document.getElementById('remainingDays').textContent = 
-        Math.ceil((30 * (100 - userData.progress)) / 100);
-    document.getElementById('readPages').textContent = userData.readPages;
+// فتح نافذة الجزء اليومي
+document.getElementById('dailyButton').addEventListener('click', () => {
+    document.querySelector('.daily-modal').style.display = 'flex';
+});
+
+// إغلاق النافذة
+function closeDailyModal() {
+    document.querySelector('.daily-modal').style.display = 'none';
+}
+
+// تحديث البيانات
+function updateUI() {
+    const data = JSON.parse(localStorage.getItem('quranProgress'));
+    
+    document.querySelector('.percentage').textContent = `${data.progress}%`;
+    document.querySelector('.surah-name').textContent = data.currentPart;
+    document.querySelectorAll('.stat-item p')[0].textContent = `${data.daysRemaining} يومًا`;
 }
 
 // التشغيل الأولي
-window.onload = function() {
-    initializeStorage();
-    updateProgress();
-    updateStats();
-};
+window.addEventListener('load', initializeApp);
