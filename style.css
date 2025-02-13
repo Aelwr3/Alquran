@@ -1,61 +1,104 @@
-/* الأساسيات */
 :root {
-    --primary-color: #1A5276;
-    --secondary-color: #D4AF37;
-    --background-color: #f0f0f0;
+    --primary: #2c5f2d;
+    --secondary: #97BC62;
+    --accent: #FFD700;
+    --background: #f8f9fa;
+    --text: #2c3e50;
+    --card-bg: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 15px;
+}
+
+/* التصميم الليلي */
+[data-theme="dark"] {
+    --primary: #1a472a;
+    --background: #1a1a1a;
+    --text: #ffffff;
+    --card-bg: #2d2d2d;
 }
 
 * {
-    font-family: 'Amiri', serif;
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+    font-family: 'Noto Naskh Arabic', serif;
 }
 
 body {
-    background-color: var(--background-color);
-    color: var(--primary-color);
+    background: var(--background);
+    color: var(--text);
+    transition: background 0.3s ease;
 }
 
-/* شريط التنقل */
 .navbar {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem;
-    background-color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-.nav-links {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-}
-
-/* قسم الترحيب */
-.hero-section {
-    text-align: center;
-    padding: 4rem 1rem;
-    background: linear-gradient(45deg, var(--primary-color), #0d3a5c);
+    align-items: center;
+    padding: 1rem 5%;
+    background: var(--primary);
     color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
 }
 
-.progress-circle {
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-icon {
+    width: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.progress-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 800px;
+    box-shadow: var(--shadow);
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.progress-ring {
+    position: relative;
     width: 200px;
     height: 200px;
-    border-radius: 50%;
-    background: conic-gradient(var(--secondary-color) 0%, transparent 0%);
-    margin: 2rem auto;
-    position: relative;
+    margin: 0 auto;
 }
 
-.progress-text {
+.ring-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(#eee 0%, transparent 0%);
+}
+
+.ring-progress {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(var(--secondary) var(--progress), transparent 0%);
+    clip-path: circle(80% at 50% 50%);
+    animation: progress 1.5s ease-out;
+}
+
+@keyframes progress {
+    from { background: conic-gradient(var(--secondary) 0%, transparent 0%); }
+}
+
+.progress-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -65,54 +108,115 @@ body {
 
 .percentage {
     font-size: 2.5rem;
-    display: block;
+    font-weight: bold;
+    color: var(--primary);
 }
 
-.cta-button {
-    background-color: var(--secondary-color);
+.daily-button {
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
     color: white;
-    padding: 1rem 2rem;
+    padding: 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    width: 100%;
+    margin-top: 2rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.daily-button:hover {
+    transform: translateY(-3px);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 0 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.stat-icon {
+    font-size: 2rem;
+}
+
+/* نافذة الجزء اليومي */
+.daily-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+}
+
+.reading-section {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2.5;
+}
+
+.action-button {
+    background: var(--primary);
+    color: white;
+    padding: 0.8rem 1.5rem;
     border: none;
     border-radius: 25px;
-    font-size: 1.2rem;
+    margin: 0 0.5rem;
     cursor: pointer;
-    transition: transform 0.3s;
 }
 
-.cta-button:hover {
-    transform: scale(1.05);
-}
-
-/* إحصائيات */
-.stats-container {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    padding: 3rem 1rem;
-    flex-wrap: wrap;
-}
-
-.stat-card {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    width: 200px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-}
-
-.stat-card h3 {
-    color: var(--secondary-color);
-    margin-bottom: 0.5rem;
+.marked {
+    background: var(--secondary);
 }
 
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
+    .progress-card {
+        margin: 1rem;
+        padding: 1rem;
     }
     
-    .progress-circle {
-        width: 150px;
-        height: 150px;
+    .daily-button {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
     }
 }
